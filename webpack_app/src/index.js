@@ -19,7 +19,7 @@ function higherOrderSorter(sortFn, component) {
 }
 
 function sortBy(key) {
-  return ({ name: a }, { name: b }) => {
+  return ({ [key]: a }, { [key]: b }) => {
     return a > b ? 1 : -1;
   };
 }
@@ -39,7 +39,7 @@ const studentElem = (studentData) => {
 };
 
 const StudentComponent = higherOrderSorter(sortBy('name'), studentElem);
-
+log(data);
 appRoot.appendChild(StudentComponent(data));
 
 /**

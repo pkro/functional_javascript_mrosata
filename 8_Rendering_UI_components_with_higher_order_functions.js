@@ -21,7 +21,7 @@ function higherOrderSorter(sortFn, component) {
 }
 
 function sortBy(key) {
-  return ({ name: a }, { name: b }) => {
+  return ({ [key]: a }, { [key]: b }) => {
     return a > b ? 1 : -1;
   };
 }
