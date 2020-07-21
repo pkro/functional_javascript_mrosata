@@ -120,3 +120,56 @@ Takeaways:
 
 **Rendering UI Components with Higher Order Functions**
 - document.createDocumentFragment creates a DOM fragment without putting it in the DOM right away
+
+**What Partial Application and Curry Mean**
+
+- arity: number of parameters a function takes
+- === fn.length property
+- predefined parameters don't count for length:
+  
+      function totalApp(a1, a2, extra = '3') {console.log(totalApp.length)} // 2
+- arity of 1 (1 argument): unary, arity of 2: binary, 3: ternary, 0 = nullary, more than 1: polyaric
+- total application (total function is applied even when arguments are missing)
+- partial application: function is not run until all arguments are present; if less arguments, parameters are bound to their variabels and returns a function with the remaining missing arguments (execution is deferred until all arguments are present)
+  
+      // NOT working in vanilla JS
+      // also wrong in video (console.log instead of return)
+      function partialApp(a1, a2, a3) {
+        return `booom ${a1+a2+a3}`;
+      }
+
+      const part1 = partialApp(100) // binds a1 = 100 and returns a binary function
+      const part2 = part1(20) // binds a2 = 20 and returns a unary function
+      const part3 = part2(30) // binds a3 = 30 and total application, part3 = "boom 60"
+      log(part3) // "boom 60"
+
+
+- currying: ordinal form of partial application, where arguments are passed in in the order they are defined in the function definition as opposed to being free which parameters are defined "first"
+
+      // not possible with currying but in some other functional languages or functional libraries
+      const a2defined = partialApp(__, 20, __) 
+      a2defined(10, __, 30) // total application
+      
+
+**Improving Higher Order Functions with Partial Application**
+- R.__ = placeholder that skips over parameters
+- what's the difference between partial / curry?
+- Currying: A function returning another function that might return another function, b**ut every returned function must take only one parameter** at a time.
+- Partial application: A function returning another function that might return another function, **but each returned function can take several parameters**.
+
+
+**Writing a Utility to Curry Functions**
+- 3 ways to call javascript functions (paranthesis, call, apply)
+- Function.prototype.bind - returns a function with values to parameters already bound
+  
+      function func(a,b) { return a+b }
+      func(1,2); // paranthesis
+      // apply / call / bind: 1st parameter is the new this (can be any value if not needed in function)
+      func.apply(null, [1,2]); // Apply, takes parameters as array, mnemonic: _A_pply = _A_rray
+      func.call(null, 1, 2); // same as apply but with individual parameters
+      const add1 = func.bind(this, 1); //returns a function with "this" rebound to first passed argument, the rest are bound to the parameters; Similar to Ramda.partial
+      //let boundFunc = func.bind(thisArg[, arg1[, arg2[, ...argN]]])
+      add1(2) // 3
+  
+
+**Combining Map, Filter, and Reduce with Curried Functions**
