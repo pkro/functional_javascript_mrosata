@@ -48,4 +48,4 @@ function filter(predicate, list) {
   return output;
 }
 
-export { map, filter, reduce };
+module.exports = { map, filter, reduce };
