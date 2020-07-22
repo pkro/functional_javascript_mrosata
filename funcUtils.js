@@ -48,4 +48,29 @@ function filter(predicate, list) {
   return output;
 }
 
-module.exports = { map, filter, reduce };
+const __ = Symbol('nothing');
+const isPlaceholder = (a) => a === __;
+const notPlaceholder = (a) => !isPlaceholder(a);
+const removePlaceholders = (a) => filter(notPlaceholder, a);
+
+function partial(func, ...args) {
+  const numReqArgs = func.length; // arrity
+
+  return function _partial(...args2) {
+    // shift any placeholders to end
+    const filledIn = map(
+      (x) => (isPlaceholder(x) && args2.length ? args2.shift() : x),
+      args
+    );
+    const current = [...filledIn, ...args2];
+    const validArgs = removePlaceholders(current);
+
+    if (validArgs.length >= numReqArgs) {
+      return func(...validArgs);
+    }
+    // still need more args
+    return partial(func, ...current);
+  };
+}
+
+module.exports = { map, filter, reduce, partial, __ };
