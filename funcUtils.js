@@ -73,4 +73,5 @@ function partial(func, ...args) {
   };
 }
 
-module.exports = { map, filter, reduce, partial, __ };
+//module.exports = { map, filter, reduce, partial, __ };
+export { map, filter, reduce, partial, __ };

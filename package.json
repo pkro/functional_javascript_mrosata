@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "First module of the functional programming course by Michael Rosata",
   "main": "1_functions_in_terms_of_return_values.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon $*",

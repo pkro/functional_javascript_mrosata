@@ -1,5 +1,5 @@
-//export default [
-const sources = [
+export default [
+  //const sources = [
   {
     kind: 'calendar#events',
     etag: '"p33k9fmm8pmvt40g"',
@@ -7296,4 +7296,4 @@ const sources = [
   },
 ];
 
-module.exports = { sources };
+//module.exports = { sources };
