@@ -173,3 +173,42 @@ Takeaways:
   
 
 **Combining Map, Filter, and Reduce with Curried Functions**
+
+
+**Understanding Mutable and Immutable Data**
+
+Sidenote: ' = "prime", derivate. A' -> "A prime (is derived from A)"
+
+- Binary trees can be used as data structures to create less costly copies for immutability
+
+**Simplifying Immutability Using Lenses**
+
+- immutable.js provides performant immutable datastructures
+- Ramda provides lightweight lenses and uses normal javascript objects / arrays
+- Ramda lenses can work on immutable.js datastructures as well in case optimization is needed
+- Vanilla javascript: Object.freeze() makes the object shallowly immutable. Sub-objects / arrays can still be mutated
+
+Lenses: 
+
+- VIEW (getter)
+- SET (setter) return a new project
+- multiple lenses can be combines to focus on nested data (and creates nested structure in the new returned object if needed)
+
+**Rendering Our Data into the DOM**
+
+**Using JSX and Virtual DOM for Readability and Performance**
+
+- .babelrc - "pragma" tells babel which function to use to translate jsx, here it's our html function.
+- If we were using react, that would be React.createElement
+
+      "plugins": [
+        "transform-exponentiation-operator",
+        ["transform-react-jsx", { "pragma": "html" }]
+      ]
+
+
+- webpack.config.js -> this is why import without suffix didn't work before
+
+      resolve: {
+          extensions: ['.js', '.jsx']
+        }
